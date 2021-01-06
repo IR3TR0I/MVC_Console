@@ -28,7 +28,11 @@ namespace MVCConsole.Models
             }
         }
 
-        
+        internal void Inserir(object v)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Produto> Ler()
         {
             List<Produto> produtos = new List<Produto>();
@@ -50,6 +54,19 @@ namespace MVCConsole.Models
 
             }
             return produtos;
+        }
+
+        public void Inserir(Produto produto)
+        {   
+            // Criamos um array de linhas para inserir no CSV
+            string[] linhas = { PrepararLinhasCSV(produto) };
+
+            //Metodo responsável por inserir linhas em um arquivo
+            File.AppendAllLines(PATH, linhas);
+        }
+        public string PrepararLinhasCSV(Produto prod)
+        {
+            return$"{prod.Codigo};{prod.Nome};{prod.Preco}";
         }
     }
 }
